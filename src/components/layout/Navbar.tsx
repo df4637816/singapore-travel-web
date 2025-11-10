@@ -5,8 +5,15 @@ import Image from 'next/image';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ThemeToggle } from './ThemeToggle';
 import { SearchBar } from '../search/SearchBar';
+import { CategoryDropdown } from '../navigation/CategoryDropdown';
+import type { RestaurantCategory } from '@/types';
 
-export function Navbar() {
+interface NavbarProps {
+  onCategorySelect?: (category: RestaurantCategory | null) => void;
+  selectedCategory?: RestaurantCategory | null;
+}
+
+export function Navbar({ onCategorySelect, selectedCategory }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
@@ -16,18 +23,17 @@ export function Navbar() {
           {/* Logo */}
           <div className="flex items-center space-x-3">
             <div className="relative h-10 w-10">
-              <Image
-                src="/images/logo.jpg"
-                alt="Logo"
-                fill
-                className="rounded-full object-cover"
-              />
+              <Image src="/images/logo.jpg" alt="Logo" fill className="rounded-full object-cover" />
             </div>
             <span className="text-xl font-bold">新加坡美食地圖</span>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:space-x-6">
+            <CategoryDropdown
+              onCategorySelect={onCategorySelect}
+              selectedCategory={selectedCategory}
+            />
             <a href="#map" className="hover:text-primary-600 dark:hover:text-primary-400">
               地圖
             </a>
@@ -51,9 +57,17 @@ export function Navbar() {
           </button>
         </div>
 
-        {/* Search Bar */}
-        <div className="pb-4">
-          <SearchBar />
+        {/* Search Bar and Category Filter */}
+        <div className="flex flex-col gap-3 pb-4 md:flex-row md:items-center">
+          <div className="flex-1">
+            <SearchBar />
+          </div>
+          <div className="md:hidden">
+            <CategoryDropdown
+              onCategorySelect={onCategorySelect}
+              selectedCategory={selectedCategory}
+            />
+          </div>
         </div>
 
         {/* Mobile Menu */}

@@ -47,7 +47,7 @@ export const searchRestaurants = (query: string): Restaurant[] => {
 export const getRestaurantsNearLocation = (
   lat: number,
   lng: number,
-  radiusKm: number = 5
+  radiusKm: number = 5,
 ): Restaurant[] => {
   return restaurants.filter((r) => {
     const distance = calculateDistance(lat, lng, r.coordinates.lat, r.coordinates.lng);
@@ -63,7 +63,7 @@ export const calculateDistance = (
   lat1: number,
   lng1: number,
   lat2: number,
-  lng2: number
+  lng2: number,
 ): number => {
   const R = 6371; // Earth's radius in km
   const dLat = toRad(lat2 - lat1);

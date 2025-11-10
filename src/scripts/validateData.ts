@@ -26,7 +26,7 @@ if (ids.length !== uniqueIds.size) {
 
 // 3. Check for missing required fields
 const missingFields = restaurants.filter(
-  (r) => !r.id || !r.name || !r.category || !r.coordinates.lat || !r.coordinates.lng
+  (r) => !r.id || !r.name || !r.category || !r.coordinates.lat || !r.coordinates.lng,
 );
 if (missingFields.length > 0) {
   console.error('❌ MISSING REQUIRED FIELDS:', missingFields.length);
@@ -48,13 +48,13 @@ const invalidCoords = restaurants.filter(
     r.coordinates.lat < SINGAPORE_BOUNDS.minLat ||
     r.coordinates.lat > SINGAPORE_BOUNDS.maxLat ||
     r.coordinates.lng < SINGAPORE_BOUNDS.minLng ||
-    r.coordinates.lng > SINGAPORE_BOUNDS.maxLng
+    r.coordinates.lng > SINGAPORE_BOUNDS.maxLng,
 );
 
 if (invalidCoords.length > 0) {
   console.warn(`⚠️  ${invalidCoords.length} restaurants with coordinates outside Singapore bounds:`);
   invalidCoords.forEach((r) =>
-    console.warn(`  - ${r.name}: (${r.coordinates.lat}, ${r.coordinates.lng})`)
+    console.warn(`  - ${r.name}: (${r.coordinates.lat}, ${r.coordinates.lng})`),
   );
 } else {
   console.log('✅ All coordinates within Singapore bounds');

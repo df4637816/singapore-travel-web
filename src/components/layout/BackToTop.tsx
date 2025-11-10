@@ -32,10 +32,11 @@ export function BackToTop() {
 
   return (
     <button
+      type="button"
       onClick={scrollToTop}
       className={cn(
         'fixed bottom-8 right-8 z-50 rounded-full bg-primary-600 p-3 text-white shadow-lg transition-all hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600',
-        isVisible ? 'opacity-100' : 'pointer-events-none opacity-0'
+        isVisible ? 'opacity-100' : 'pointer-events-none opacity-0',
       )}
       aria-label="Back to top"
     >

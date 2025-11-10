@@ -13,7 +13,7 @@ export function cn(...inputs: ClassValue[]) {
  */
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
-  delay: number = 800
+  delay: number = 800,
 ): (...args: Parameters<T>) => void {
   let timeoutId: NodeJS.Timeout;
 
