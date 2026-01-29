@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { ThemeToggle } from './ThemeToggle';
 import { SearchBar } from '../search/SearchBar';
@@ -43,9 +44,12 @@ export function Navbar({ onCategorySelect, selectedCategory }: NavbarProps) {
             <a href="#map" className="text-primary-700 transition-colors hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400">
               地圖
             </a>
-            <a href="#about" className="text-primary-700 transition-colors hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400">
+            <Link href="/itinerary" className="text-primary-700 transition-colors hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400">
+              行程
+            </Link>
+            <Link href="/about" className="text-primary-700 transition-colors hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400">
               關於
-            </a>
+            </Link>
             <ThemeToggle />
           </div>
 
@@ -87,13 +91,20 @@ export function Navbar({ onCategorySelect, selectedCategory }: NavbarProps) {
               >
                 地圖
               </a>
-              <a
-                href="#about"
+              <Link
+                href="/itinerary"
+                className="text-primary-700 transition-colors hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                行程
+              </Link>
+              <Link
+                href="/about"
                 className="text-primary-700 transition-colors hover:text-primary-600 dark:text-primary-300 dark:hover:text-primary-400"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 關於
-              </a>
+              </Link>
             </div>
           </div>
         )}

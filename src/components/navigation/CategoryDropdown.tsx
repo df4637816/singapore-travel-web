@@ -1,11 +1,9 @@
 'use client';
 
-import { useMemo } from 'react';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/24/outline';
-import { getCategoriesWithCounts } from '@/data/categories';
+import { categories, getCategoriesWithCounts } from '@/data/categories';
 import type { RestaurantCategory } from '@/types';
-import { ThemeToggle } from '@/components/layout/ThemeToggle';
 
 interface CategoryDropdownProps {
   onCategorySelect?: (category: RestaurantCategory | null) => void;
@@ -13,50 +11,30 @@ interface CategoryDropdownProps {
 }
 
 export function CategoryDropdown({ onCategorySelect, selectedCategory }: CategoryDropdownProps) {
-  const categoriesWithCounts = useMemo(() => getCategoriesWithCounts(), []);
+  const categoriesWithCounts = getCategoriesWithCounts();
 
   // Group categories by type for better organization
-  const popularCategories = useMemo(
-    () =>
-      categoriesWithCounts.filter((cat) =>
-        ['肉骨茶', '海南雞飯', '叻沙', '海鮮', '早午餐', '咖啡'].includes(cat.name),
-      ),
-    [categoriesWithCounts],
+  const popularCategories = categoriesWithCounts.filter((cat) =>
+    ['肉骨茶', '海南雞飯', '叻沙', '海鮮', '早午餐', '咖啡'].includes(cat.name),
   );
 
-  const noodlesAndRice = useMemo(
-    () =>
-      categoriesWithCounts.filter((cat) =>
-        ['麵食', '雲吞', '鴨肉飯', '剪刀剪', '椰漿飯'].includes(cat.name),
-      ),
-    [categoriesWithCounts],
+  const noodlesAndRice = categoriesWithCounts.filter((cat) =>
+    ['麵食', '雲吞', '鴨肉飯', '剪刀剪', '椰漿飯'].includes(cat.name),
   );
 
-  const snacksAndDesserts = useMemo(
-    () =>
-      categoriesWithCounts.filter((cat) =>
-        ['點心', '豆花', '炒蘿蔔糕'].includes(cat.name),
-      ),
-    [categoriesWithCounts],
+  const snacksAndDesserts = categoriesWithCounts.filter((cat) =>
+    ['點心', '豆花', '炒蘿蔔糕'].includes(cat.name),
   );
 
-  const internationalCuisine = useMemo(
-    () =>
-      categoriesWithCounts.filter((cat) =>
-        ['印度料理', '印度煎餅', '速食'].includes(cat.name),
-      ),
-    [categoriesWithCounts],
+  const internationalCuisine = categoriesWithCounts.filter((cat) =>
+    ['印度料理', '印度煎餅', '速食'].includes(cat.name),
   );
 
-  const otherCategories = useMemo(
-    () =>
-      categoriesWithCounts.filter(
-        (cat) =>
-          ![...popularCategories, ...noodlesAndRice, ...snacksAndDesserts, ...internationalCuisine]
-            .map((c) => c.name)
-            .includes(cat.name),
-      ),
-    [categoriesWithCounts, popularCategories, noodlesAndRice, snacksAndDesserts, internationalCuisine],
+  const otherCategories = categoriesWithCounts.filter(
+    (cat) =>
+      ![...popularCategories, ...noodlesAndRice, ...snacksAndDesserts, ...internationalCuisine]
+        .map((c) => c.name)
+        .includes(cat.name),
   );
 
   const handleSelectCategory = (category: RestaurantCategory | null) => {
@@ -255,17 +233,6 @@ export function CategoryDropdown({ onCategorySelect, selectedCategory }: Categor
               ))}
             </>
           )}
-
-          {/* Theme Toggle Section */}
-          <div className="my-1 border-t border-gray-200 dark:border-gray-700" />
-          <div className="px-4 py-2">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                主題
-              </span>
-              <ThemeToggle />
-            </div>
-          </div>
         </div>
       </MenuItems>
     </Menu>

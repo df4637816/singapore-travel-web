@@ -97,3 +97,67 @@ export interface GeoJSONFeatureCollection {
   type: 'FeatureCollection';
   features: GeoJSONFeature[];
 }
+
+/**
+ * Food category group types
+ */
+export type CategoryGroup =
+  | 'noodles'
+  | 'rice'
+  | 'dim-sum'
+  | 'fried'
+  | 'seafood'
+  | 'beverage'
+  | 'dessert'
+  | 'breakfast'
+  | 'international'
+  | 'other';
+
+/**
+ * Food category introduction with detailed information
+ */
+export interface FoodCategoryIntro {
+  id: string;
+  categoryId: string;
+  name: string;
+  nameEn?: string;
+  description: string;
+  highlights: string[];
+  priceRange: {
+    min: PriceRange;
+    max: PriceRange;
+    typical: PriceRange;
+    description: string;
+  };
+  image?: string;
+  popularDishes?: string[];
+  tips?: string[];
+  bestTime?: string;
+  categoryGroup?: CategoryGroup;
+}
+
+/**
+ * Itinerary item (restaurant or custom location)
+ */
+export interface ItineraryItem {
+  id: string;
+  name: string;
+  type: 'restaurant' | 'custom'; // 来自数据库或自由输入
+  restaurantId?: string; // 如果是餐厅，保存 ID
+}
+
+/**
+ * Itinerary day with items
+ */
+export interface ItineraryDay {
+  id: string;
+  dayNumber: number;
+  items: ItineraryItem[];
+}
+
+/**
+ * Itinerary state containing all days
+ */
+export interface ItineraryState {
+  days: ItineraryDay[];
+}
