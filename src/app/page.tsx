@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { Navbar } from '@/components/layout/Navbar';
 import { GoogleMap } from '@/components/map/Map';
 import { BackToTop } from '@/components/layout/BackToTop';
+import { FoodIntroSection } from '@/components/food-intro/FoodIntroSection';
 import type { RestaurantCategory } from '@/types';
 
 export default function Home() {
@@ -33,7 +34,11 @@ export default function Home() {
           )}
         </div>
 
-        <div className="overflow-hidden rounded-lg shadow-lg">
+        {/* Food Introduction Section */}
+        <FoodIntroSection selectedCategory={selectedCategory} />
+
+        {/* Map Section */}
+        <div id="map-section" className="overflow-hidden rounded-lg shadow-lg">
           <GoogleMap selectedCategory={selectedCategory} />
         </div>
       </div>
